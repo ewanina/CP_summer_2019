@@ -3,8 +3,30 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class FolderSizeCheck {
-    private static int sumSize(int file) {
-    if  }
+
+    private static long sumSize(File file) {
+        if (file.isFile()) return file.length();
+        else {
+            File[] files = file.listFiles();
+            long sum = 0;
+            for (File f : files) {
+                sum += sumSize(f);
+                //System.out.println(f.length());
+            }
+            return sum;
+        }
+    }
+
+    public static void main(String[] args) {
+        File newFile = new File("C:\\Users\\nl72246\\Desktop\\MyFile");
+
+
+        System.out.println(sumSize(newFile));
+    }
+
+}
+
+/*
     public static void main(String[] args) {
         File newFile = new File("C:\\Users\\nl72246\\Desktop\\MyFile");
 
@@ -19,6 +41,7 @@ public class FolderSizeCheck {
 
     }
 }
+*/
 
 /*    public static void main(String[] args) throws FileNotFoundException {
 
